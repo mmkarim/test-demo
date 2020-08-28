@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class EmailsController < ApplicationController
-  before_action :set_email, only: [:show, :edit, :update, :destroy]
+  before_action :set_email, only: [:show]
 
   # GET /emails
   # GET /emails.json
@@ -19,10 +19,6 @@ class EmailsController < ApplicationController
     @email = Email.new
   end
 
-  # GET /emails/1/edit
-  def edit
-  end
-
   # POST /emails
   # POST /emails.json
   def create
@@ -36,30 +32,6 @@ class EmailsController < ApplicationController
         format.html { render :new }
         format.json { render json: @email.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # PATCH/PUT /emails/1
-  # PATCH/PUT /emails/1.json
-  def update
-    respond_to do |format|
-      if @email.update(email_params)
-        format.html { redirect_to @email, notice: 'Email was successfully updated.' }
-        format.json { render :show, status: :ok, location: @email }
-      else
-        format.html { render :edit }
-        format.json { render json: @email.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /emails/1
-  # DELETE /emails/1.json
-  def destroy
-    @email.destroy
-    respond_to do |format|
-      format.html { redirect_to emails_url, notice: 'Email was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
