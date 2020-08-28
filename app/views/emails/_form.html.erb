@@ -23,7 +23,9 @@
 
   <div class="field">
     <%= form.label :message_body %>
-    <%= form.text_area :message_body %>
+    <%= md_simple_editor do %>
+        <%= form.text_area :message_body %>
+    <% end %>
   </div>
 
   <div class="actions">
