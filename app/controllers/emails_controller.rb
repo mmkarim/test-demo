@@ -6,7 +6,8 @@ class EmailsController < ApplicationController
   # GET /emails
   # GET /emails.json
   def index
-    @emails = Email.all
+    #TODO: add proper indexes in the DB
+    @emails = Email.where(direction: direction).order(created_at: :desc)
   end
 
   # GET /emails/1
@@ -50,5 +51,9 @@ class EmailsController < ApplicationController
 
     def default_email_params
       { direction: Email.directions[:out], from: Settings[:email][:default_from] }
+    end
+
+    def direction
+      params[:direction] || Email.directions[:in]
     end
 end
