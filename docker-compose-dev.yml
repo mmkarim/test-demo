@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:9.5
+    volumes:
+      - ./tmp/new_db_dev:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: new
+      POSTGRES_PASSWORD: new_password
+  web:
+    stdin_open: true
+    image: mmkarim/test_demo_dev
+    build:
+      context: .
+      dockerfile: ./Dockerfile.dev
+    command: bundle exec rails s -b 0.0.0.0
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    links:
+      - db
+    environment:
+      PG_USER: new
+      PG_PASSWORD: new_password
+      PG_HOST: db
