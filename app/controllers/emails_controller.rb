@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EmailsController < ApplicationController
   before_action :set_email, only: [:show, :edit, :update, :destroy]
 
@@ -24,7 +26,7 @@ class EmailsController < ApplicationController
   # POST /emails
   # POST /emails.json
   def create
-    @email = Email.new(email_params)
+    @email = Email.new(email_params.merge(default_email_params))
 
     respond_to do |format|
       if @email.save
@@ -69,6 +71,10 @@ class EmailsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def email_params
-      params.require(:email).permit(:subject, :to, :from, :message_body, :direction)
+      params.require(:email).permit(:subject, :to, :message_body)
+    end
+
+    def default_email_params
+      { direction: Email.directions[:out], from: Settings[:email][:default_from] }
     end
 end

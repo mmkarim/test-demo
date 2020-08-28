@@ -1,0 +1,2 @@
+email:
+  default_from: <%= (ENV["DEFAULT_FORM"] || "from@example.com") %>

@@ -22,17 +22,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :from %>
-    <%= form.text_field :from %>
-  </div>
-
-  <div class="field">
     <%= form.label :message_body %>
     <%= form.text_area :message_body %>
-  </div>
-
-  <div class="field">
-    <%= form.hidden_field :direction, value: Email.directions[:out] %>
   </div>
 
   <div class="actions">
